@@ -1,0 +1,27 @@
+- platform: template      
+  sensors:
+    smartlock_door:
+      friendly_name: 门状态
+      value_template: 未知
+      icon_template: mdi:door-closed-lock
+    smartlock_state:
+      friendly_name: 门锁状态
+      value_template: 未知
+      icon_template: mdi:lock-smart
+    smartlock_method: 
+      friendly_name: 开门方式
+      value_template: 未知
+      icon_template: mdi:lock-question
+    smartlock_user: 
+      friendly_name: 操作者
+      value_template: 未知
+      icon_template: mdi:human-handsdown
+    smartlock_changetime:
+      friendly_name: 操作时间
+      value_template: >-
+        {% if as_timestamp(states.sensor["243a27447cd4_action"].last_updated) > as_timestamp(states.sensor.xi_tong_qi_dong_shi_jian.state) %}
+          {{ as_local(states.sensor["243a27447cd4_action"].last_changed).strftime('%Y-%m-%d %H:%M:%S') }}
+        {% else %}
+          无
+        {% endif %}
+      icon_template: mdi:lock-clock
